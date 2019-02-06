@@ -2,6 +2,8 @@
 
 #########################################
 # Imports
+import requests
+import json
 #########################################
 # - Logging
 import  logging
@@ -245,7 +247,13 @@ def level_ok(space, arbiter, *args, **kwargs):
     log.debug("Level reached")
 
     level['server'].write(LEVEL_RO_ADDR + LEVEL_TAG_SENSOR, 1)  # Level Sensor Hit, Bottle Filled
-    #todo THIS IS WHERE SCOREBOARD INTEGRATION GOES
+    
+    # Send score up to scoreboard engine
+    with open("config.json") as f:
+        config = json.load(f)
+    keys = {'identifier': config["teamname"]}
+    requests.post(config["scoreboard_ip"] + ":5000/oneup",keys)
+    config.close()
 
     return False
 
