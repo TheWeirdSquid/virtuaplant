@@ -41,6 +41,7 @@ The following packages are required:
 * PyMunk
 * PyModbus (requires pycrypto, pyasn1)
 * PyGObject / GTK
+* Requests
 
 On debian-based systems (like Ubuntu) you can apt-get the packages which are not provided over pip:
 
@@ -52,10 +53,12 @@ Then install the pip ones:
     pip install pymodbus
     pip install pyasn1
     pip install pycrypto
+    pip install requests
 
 or install all of the pip packages by using our provided requirement.txt file:
 
     pip install < requirements.txt
+    pip install requests
 
 
 ## Running
