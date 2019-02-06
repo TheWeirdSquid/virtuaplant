@@ -58,7 +58,6 @@ Then install the pip ones:
 or install all of the pip packages by using our provided requirement.txt file:
 
     pip install < requirements.txt
-    pip install requests
 
 
 ## Running
