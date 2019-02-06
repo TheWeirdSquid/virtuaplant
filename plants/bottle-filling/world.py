@@ -245,6 +245,7 @@ def level_ok(space, arbiter, *args, **kwargs):
     log.debug("Level reached")
 
     level['server'].write(LEVEL_RO_ADDR + LEVEL_TAG_SENSOR, 1)  # Level Sensor Hit, Bottle Filled
+    #todo THIS IS WHERE SCOREBOARD INTEGRATION GOES
 
     return False
 
