@@ -298,8 +298,7 @@ def update_scoreboard(new_abcd):
     if abcd == True and prev_abcd == False:
         with open("config.json","r") as f:
             config = json.load(f)
-        keys = {'identifier': config["teamname"]}
-        requests.post(config["scoreboard_ip"] + ":5000/oneup",keys)
+        requests.post("192.168.20.167:5000/oneup", data = {"identifier": "Team 1"})
         config.close()
 
 def runWorld():
