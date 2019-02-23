@@ -22,6 +22,9 @@ import  pymunk
 from    modbus              import ServerModbus as Server
 from    modbus              import ClientModbus as Client
 
+abcd = False
+prev_abcd = False
+
 #########################################
 # Logging
 #########################################
@@ -283,17 +286,15 @@ def no_bottle(space, arbiter, *args, **kwargs):
     
     return False
 
-contact = None
-prev_contact = None
-
 ################################
 # SEND STUFF TO THE SCOREBOARD
 ################################
-def update_scoreboard(new_contact):
-    prev_contact = contact
-    contact = new_contact
+def update_scoreboard(new_abcd):
+    #
+    prev_abcd = abcd
+    abcd = new_abcd
 
-    if contact == True and prev_contact == False:
+    if abcd == True and prev_abcd == False:
         with open("config.json","r") as f:
             config = json.load(f)
         keys = {'identifier': config["teamname"]}
