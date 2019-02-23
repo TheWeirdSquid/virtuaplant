@@ -247,13 +247,9 @@ def level_ok(space, arbiter, *args, **kwargs):
     log.debug("Level reached")
 
     level['server'].write(LEVEL_RO_ADDR + LEVEL_TAG_SENSOR, 1)  # Level Sensor Hit, Bottle Filled
-    
-    # Send score up to scoreboard engine
-    with open("config.json") as f:
-        config = json.load(f)
-    keys = {'identifier': config["teamname"]}
-    requests.post(config["scoreboard_ip"] + ":5000/oneup",keys)
-    config.close()
+
+    # Sends a signal saying that the level sensor is touching water.
+    update_scoreboard(True)
 
     return False
 
@@ -281,8 +277,28 @@ def no_bottle(space, arbiter, *args, **kwargs):
     log.debug("No Bottle")
 
     contact['server'].write(CONTACT_RO_ADDR + CONTACT_TAG_SENSOR, 0)
+
+    # Sends a signal saying that there is no bottle. Basically justs resets the update_scoreboard function.
+    update_scoreboard(False)
     
     return False
+
+contact = None
+prev_contact = None
+
+################################
+# SEND STUFF TO THE SCOREBOARD
+################################
+def update_scoreboard(new_contact):
+    prev_contact = contact
+    contact = new_contact
+
+    if contact == True and prev_contact == False:
+        with open("config.json","r") as f:
+            config = json.load(f)
+        keys = {'identifier': config["teamname"]}
+        requests.post(config["scoreboard_ip"] + ":5000/oneup",keys)
+        config.close()
 
 def runWorld():
     pygame.init()
