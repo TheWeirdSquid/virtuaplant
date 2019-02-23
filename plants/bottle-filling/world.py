@@ -290,7 +290,8 @@ def no_bottle(space, arbiter, *args, **kwargs):
 # SEND STUFF TO THE SCOREBOARD
 ################################
 def update_scoreboard(new_abcd):
-    #
+    global abcd
+    global prev_abcd
     prev_abcd = abcd
     abcd = new_abcd
 
