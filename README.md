@@ -6,6 +6,9 @@ All the software is written in (guess what?) Python. The idea is for VirtuaPlant
 
 The first release introduces a as-simple-as-it-can-get one-process “bottle-filling factory” running Modbus as its protocol.
 
+## IMPORTANT NOTICE
+The files in this version of virtuaplant have been edited to send a response to a custom scoreboard project. As such, a custom version of plc.py is required. The custom version of plc.py is included in the main directory, but needs to be moved to /usr/local/bin/bluecowbottling/plc.py. If there is already a verison of plc.py present, replace it.
+
 ## Components
 ### World View
 
